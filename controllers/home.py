@@ -32,3 +32,10 @@ class Home(object):
     def faq(self):
         EMAIL = cherrypy.request.config.get("email")
         return {"email" : EMAIL}
+
+    @cherrypy.expose
+    @cherrypy.tools.jinja(template="home/dafni_teams.html")
+    def dafni_teams(self):
+        EMAIL = cherrypy.request.config.get("email")
+        return {"email" : EMAIL}
+

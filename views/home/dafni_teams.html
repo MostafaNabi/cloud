@@ -1,0 +1,251 @@
+{% set title ="DAFNI Teams" %}
+
+{% extends "layout.html" %}
+
+{% block css %}
+<style>
+    .options-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .options-tile {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 5px 5px 5px grey;
+        margin-right: 10px;
+    }
+
+    .options-tile-text {
+        display: block;
+        font-size: 14px;
+        color: black;
+        text-align: center;
+    }
+
+    .data-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 50px;
+    }
+
+    .data-tile {
+        position: relative;
+        display: block;
+        min-width: 200px;
+        min-height: 300px;
+        border: 1px solid black;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 5px 5px 5px grey;
+        margin-right: 10px;
+    }
+
+    .data-tile-title {
+        position: static;
+        display: block;
+        text-align: center;
+        border-bottom: 1px solid black;
+    }
+
+    .data-tile-content {
+        position: static;
+        display: block;
+        margin-top: 20px;
+        border: 1px solid black;
+    }
+    
+    #create-window {
+        position: fixed;
+        top: 200px;
+        left: 600px;
+        display: none;
+        width: 500px;
+        height: 500px;
+        border: 1px solid black;
+        background: white;
+        z-index:10000000;
+    }
+
+    .create-window-tab-bar {
+        position: relative;
+        display: block;
+        max-height: 50px;
+        border-bottom: 1px solid black;
+    }
+
+    .create-window-tab {
+        position: relative;
+        display: inline-block;
+        border: 1px solid black;
+        background-color: lightgrey;
+    }
+
+    .create-window-content {
+        position: relative;
+        display: block;
+        margin-top: 50px;
+    }
+
+    .create-window-content-panel {
+        display: none;
+    }
+
+    #create-window-content-general {
+        position: relative;
+        display: block;
+    }
+
+    .active-tab {
+        background-color: white;
+    }
+
+</style>
+{% endblock %}
+{% block javascript %}
+<script type='text/javascript'>
+    function showCreateTeam() {
+        document.getElementById('create-window').style.setProperty('display', 'block');
+    }
+
+    function hideCreateTeam() {
+        document.getElementById('create-window').style.setProperty('display', 'none');
+    }
+
+    function showGeneralTab() {
+        document.getElementById('create-window-content-general').style.setProperty('display', 'block');
+        document.getElementById('create-window-content-members').style.setProperty('display', 'none');
+        document.getElementById('create-window-content-create').style.setProperty('display', 'none');
+
+        document.getElementById('general-tab').classList.add('active-tab');
+        document.getElementById('members-tab').classList.remove('active-tab');
+        document.getElementById('create-tab').classList.remove('active-tab');
+    }
+
+    function showMembersTab() {
+        document.getElementById('create-window-content-general').style.setProperty('display', 'none');
+        document.getElementById('create-window-content-members').style.setProperty('display', 'block');
+        document.getElementById('create-window-content-create').style.setProperty('display', 'none');
+
+        document.getElementById('general-tab').classList.remove('active-tab');
+        document.getElementById('members-tab').classList.add('active-tab');
+        document.getElementById('create-tab').classList.remove('active-tab');
+    }
+
+    function showCreateTab() {
+        document.getElementById('create-window-content-general').style.setProperty('display', 'none');
+        document.getElementById('create-window-content-members').style.setProperty('display', 'none');
+        document.getElementById('create-window-content-create').style.setProperty('display', 'block');
+        
+        document.getElementById('general-tab').classList.remove('active-tab');
+        document.getElementById('members-tab').classList.remove('active-tab');
+        document.getElementById('create-tab').classList.add('active-tab');
+    }
+
+</script>
+{% endblock %}
+
+{% block content %}
+    <div class='options-row'>
+        <div class='options-tile'>
+            <span class='options-tile-text' onclick="showCreateTeam()"> +Create Team </span>
+        </div>
+        <div class='options-tile'>
+            <span class='options-tile-text'> My Team </span>
+        </div>
+        <div class='options-tile'>
+            <span class='options-tile-text'> Collaborator Team </span>
+        </div>
+    </div>
+
+    <div class='data-container'>
+
+        <div class='data-tile'> <!-- Start Tile -->
+            <div class='data-tile-header'>
+                <div class='data-tile-title'>
+                    <span class='data-tile-title-text'> Team Blue </span>
+                </div>
+           </div>
+            <div class='data-tile-content'>
+                <ul>
+                    <li> Mostafa </li>
+                    <li> Sri </li>
+                    <li> Samuel</li>
+                    <li> James </li>
+                    <li> Ron </li>
+                </ul>
+            </div>
+        </div> <!-- End Tile -->
+
+        <div class='data-tile'> <!-- Start Tile -->
+            <div class='data-tile-header'>
+                <div class='data-tile-title'>
+                    <span class='data-tile-title-text'> Team Red </span>
+                </div>
+           </div>
+            <div class='data-tile-content'>
+                <ul>
+                    <li> Chris </li>
+                    <li> Elliot </li>
+                    <li> Benga </li>
+                    <li> Algis </li>
+                    <li> Stefan </li>
+                </ul>
+            </div>
+        </div> <!-- End Tile -->
+
+        <div class='data-tile'> <!-- Start Tile -->
+            <div class='data-tile-header'>
+                <div class='data-tile-title'>
+                    <span class='data-tile-title-text'> Team Orange </span>
+                </div>
+           </div>
+            <div class='data-tile-content'>
+                <ul>
+                    <li> Majid </li>
+                    <li> Sidak </li>
+                    <li> Erica </li>
+                    <li> Alice </li>
+                    <li> Gisselle </li>
+                </ul>
+            </div>
+        </div> <!-- End Tile -->
+    </div>
+
+    <div id='create-window'>
+        <div class='create-window-tab-bar'>
+            <div id='general-tab' class='create-window-tab active-tab' onclick="showGeneralTab()">General</div>
+            <div id='members-tab' class='create-window-tab' onclick="showMembersTab()">Members</div>
+            <div id='create-tab' class='create-window-tab' onclick="showCreateTab()">Create</div>
+            <div class='create-window-tab' style="float:right" onclick="hideCreateTeam()">Cancel</div>
+        </div>
+        <div class='create-window-content'>
+            <div id='create-window-content-general' class='create-window-content-panel'>
+                <p> Team Name: <input type='text'/> </p>
+            </div>
+            
+            <div id='create-window-content-members' class='create-window-content-panel'>
+                <p> Name: <input type='text' placeholder='collaborator'/> 
+                    Role: <select>
+                        <option> Technical Lead</option>
+                        <option> Relations </option>
+                        <option> Add Role </option>
+                    </select>
+                </p>
+
+            </div>
+
+            <div id='create-window-content-create' class='create-window-content-panel'>
+                <input type='button' value='Create'/>
+            </div>
+        </div>
+   </div>
+{% endblock %}

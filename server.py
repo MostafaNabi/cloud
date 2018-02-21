@@ -32,6 +32,8 @@ cherrypy.config.badwords = [w.strip() for w in badwords]
 f.close()
 
 cloudPlatform = cherrypy.config.get("cloudPlatform")
+# Bugfix - hardcoding cloudPlatform because cherypy.config.get does not get any cloudPlatform
+cloudPlatform = "openstack"
 
 # PAGES
 home = Home()
@@ -70,24 +72,24 @@ api.templatelist = TemplateList()
 cherrypy.tree.mount(api, "/api", "config/api.conf")
 
 # Launch websockify for NoVNC
-wsparams = [
-    '/usr/bin/websockify',
-    '-v',
-    str(cherrypy.config.get("wsport")),
-    '--target-config=' + cherrypy.config.get("wstokendir")
-]
+#wsparams = [
+#    '/usr/bin/websockify',
+#    '-v',
+#    str(cherrypy.config.get("wsport")),
+#    '--target-config=' + cherrypy.config.get("wstokendir")
+#]
 
-if cherrypy.config.get("wscert") != None:
-    wsparams.append('--cert=' + cherrypy.config.get("wscert"))
-    wsparams.append('--key=' + cherrypy.config.get("wskey"))
+#if cherrypy.config.get("wscert") != None:
+#    wsparams.append('--cert=' + cherrypy.config.get("wscert"))
+#    wsparams.append('--key=' + cherrypy.config.get("wskey"))
 
-websockify = Popen(wsparams)
+#websockify = Popen(wsparams)
 
-if cherrypy.config.get("wsgi_enabled") == True:
-    # make WSGI compliant
-    application = cherrypy.tree
-else:
+#if cherrypy.config.get("wsgi_enabled") == True:
+#    # make WSGI compliant
+#    application = cherrypy.tree
+#else:
     # run as stand alone
-    cherrypy.engine.start()
-    cherrypy.engine.block()
-    websockify.terminate()
+cherrypy.engine.start()
+cherrypy.engine.block()
+#websockify.terminate()
